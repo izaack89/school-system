@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 
 class Student extends Model {}
 
-Example.init(
+Student.init(
   {
     id: {
       type: DataTypes.INTEGER,
