@@ -3,21 +3,16 @@ const Professor = require('./Professor');
 const Student = require('./Student');
 const Subject = require('./Subject');
 
-Student.belongsToMany(Subject, {    
-    through: {
-      model: Enrollment,
-      unique: false
-    },
-    as: 'student_subjects'
+
+Student.hasMany(Enrollment, {
+    foreignKey: 'student_id',
+    onDelete: 'CASCADE'
+  });
+  
+  Enrollment.belongsTo(Student, {
+    foreignKey: 'student_id'
   });
 
-Subject.belongsToMany(Student, {    
-    through: {
-      model: Enrollment,
-      unique: false
-    },
-    as: 'subjects_students'
-});
 Professor.belongsToMany(Enrollment, {    
     through: {
       model: Subject,
