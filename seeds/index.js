@@ -1,7 +1,7 @@
 const sequelize = require('../config/connection');
 const seedStudent = require('./seedStudent');
 const seedProfessor = require('./seedProfessor');
-const seedEnrollment = require('./seedSubject');
+const seedEnrollment = require('./seedEnrollment');
 const seedSubject = require('./seedSubject');
 
 const seedAll = async () => {
@@ -9,8 +9,8 @@ const seedAll = async () => {
 
   await seedStudent();
   await seedProfessor();
-  await seedEnrollment();
   await seedSubject();
+  await seedEnrollment();
 
   process.exit(0);
 };
