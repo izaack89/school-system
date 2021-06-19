@@ -11,7 +11,7 @@ Enrollment.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    course_id: {
+    subject_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
