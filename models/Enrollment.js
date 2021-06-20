@@ -1,8 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-
-class Enrollment extends Model {}
-
+class Enrollment extends Model { }
 Enrollment.init(
   {
     id: {
@@ -11,17 +9,37 @@ Enrollment.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    grade: {
+      type: DataTypes.DECIMAL(4, 1),
+      allowNull: false,
+      defaultValue: 1
+    },
     subject_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'subject',
+        key: 'id',
+        unique: false
+      }
+    },
+    profesor_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'professor',
+        key: 'id',
+        unique: false
+      }
     },
     student_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    grade: {
-        type: DataTypes.DECIMAL(4, 1),
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'student',
+        key: 'id',
+        unique: false
+      }
     },
   },
   {
@@ -32,5 +50,4 @@ Enrollment.init(
     modelName: 'enrollment',
   }
 );
-
 module.exports = Enrollment;
