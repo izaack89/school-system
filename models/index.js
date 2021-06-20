@@ -3,31 +3,58 @@ const Professor = require('./Professor');
 const Student = require('./Student');
 const Subject = require('./Subject');
 
+// Relations between Students and Professor
+Student.belongsToMany(Professor, {    
+  through: {
+    model: Enrollment,
+    unique: false
+  },
+  as: 'student_professor'
+});
 
-Student.hasMany(Enrollment, {
-    foreignKey: 'student_id',
-    onDelete: 'CASCADE'
-  });
-  
-  Enrollment.belongsTo(Student, {
-    foreignKey: 'student_id'
-  });
 
-Professor.belongsToMany(Enrollment, {    
+Professor.belongsToMany(Student, {
+  through: {
+    model: Enrollment,
+    unique: false
+  },
+  as: 'professors_student'
+});
+
+// Relations between Subject and Professor
+Subject.belongsToMany(Professor, {    
+  through: {
+    model: Enrollment,
+    unique: false
+  },
+  as: 'subject_professor'
+});
+
+
+Professor.belongsToMany(Subject, {
+  through: {
+    model: Enrollment,
+    unique: false
+  },
+  as: 'professors_subjects'
+});
+
+// Relations between Subject and Student
+Subject.belongsToMany(Student, {    
     through: {
-      model: Subject,
+      model: Enrollment,
       unique: false
     },
-    as: 'proffesor_enrollment'
+    as: 'subject_students'
 });
   
   
-Enrollment.belongsToMany(Professor, {
+Student.belongsToMany(Subject, {
     through: {
-      model: Subject,
+      model: Enrollment,
       unique: false
     },
-    as: 'enrollment_professor'
+    as: 'students_subjects'
   });
 
 module.exports = { Enrollment, Professor,Student,Subject};

@@ -1,8 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-
 class Student extends Model {}
-
 Student.init(
   {
     id: {
@@ -23,13 +21,30 @@ Student.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        isEmail: true
+      }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [8],
+      },
   },
   },
   {
+    //Add la parte de hooks a 
+    hooks: {
+      beforeCreate: async (newStudentData) => {
+        newStudentData.password = await bcrypt.hash(newStudentData.password, 10);
+        return newStudentData;
+      },
+      beforeUpdate: async (updatedStudentData) => {
+        updatedStudentData.password = await bcrypt.hash(updatedStudentData.password, 10);
+        return updatedStudentData;
+      },
+    },
     sequelize,
     timestamps: false,
     freezeTableName: true,
@@ -37,5 +52,4 @@ Student.init(
     modelName: 'student',
   }
 );
-
 module.exports = Student;
