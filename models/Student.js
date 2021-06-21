@@ -1,7 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
-class Student extends Model {}
+class Student extends Model {
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
 Student.init(
   {
     id: {
@@ -32,11 +36,19 @@ Student.init(
       validate: {
         len: [8],
       },
-  },
+    },
   },
   {
     //Add la parte de hooks a 
     hooks: {
+      beforeBulkCreate: async (users) => {
+        console.log(users);
+        const newUsers = users.map( async(user) =>{
+          user.password = await bcrypt.hash(user.password, 10);
+        });
+        console.log(newUsers);
+        return newUsers;
+      },
       beforeCreate: async (newStudentData) => {
         newStudentData.password = await bcrypt.hash(newStudentData.password, 10);
         return newStudentData;
@@ -45,12 +57,12 @@ Student.init(
         updatedStudentData.password = await bcrypt.hash(updatedStudentData.password, 10);
         return updatedStudentData;
       },
-    },
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'student',
+  },
+  sequelize,
+  timestamps: false,
+  freezeTableName: true,
+  underscored: true,
+  modelName: 'student',
   }
 );
 module.exports = Student;

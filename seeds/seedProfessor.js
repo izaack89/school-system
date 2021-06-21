@@ -6,7 +6,7 @@ const professordata = [
     first_name: 'Aaron',
     last_name: 'Goldberg',
     email: 'aaron@bootcamp.com',
-    password: 'goldman',
+    password: 'goldman1',
   },
   {
     id: '2',
