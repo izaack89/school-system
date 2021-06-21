@@ -7,11 +7,15 @@
         <div class="col-lg-4 col-md-6 mb-5">
           <div class="card">
             <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 ">
-              <h5 class="mt-2 text-dark">{{title}}</h5>
+              <h4 class="mt-2 text-dark">{{title}}</h4>
+              {{#each subject.subject_professor as |professor|}}
+                {{#if (is_equal subject.enrollment.professorId id) }}
+                      <p>Professor: {{professor.first_name}} {{professor.last_name}} </p>
+                {{/if}}
+              {{/each}}
               <a href="/subject/{{id}}"
                 class="font-weight-bold text-xs text-uppercase font-weight-bolder text-info icon-move-right">
                 Check Class Info
-                <p>{{subject.subject_professor.first_name}}</p>
                 <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
               </a>
             </div>
