@@ -6,14 +6,14 @@ const studentdata = [
     first_name: 'Yazmin',
     last_name: 'Tinoco',
     email: 'yaz@hotmail.com',
-    password: '123456',
+    password: '12345678',
   },
   {
     id: '2',
     first_name: 'German',
     last_name: 'Ramirez',
     email: 'german@yahoo.com',
-    password: '11223344',
+    password: '$2b$10$xggcfE/2LaUr4ytNjWBD5.js9K7mUN/ufIM2.1oAbrQnSZ8NjuPk2',
   },
   {
     id: '3',

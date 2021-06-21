@@ -23,7 +23,7 @@ Enrollment.init(
         unique: false
       }
     },
-    profesor_id: {
+    professor_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
