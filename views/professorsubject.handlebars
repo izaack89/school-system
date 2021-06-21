@@ -1,0 +1,32 @@
+<div class="container-main">
+  <h2 class="login100-form-title fs-70" style="color: white;">Welcome, {{first_name}} {{last_name}}!</h2>
+
+  {{#if professors_subjects.length}}
+    <div class="row">
+      {{#each professors_subjects as |subject|}}
+        <div class="col-lg-4 col-md-6 mb-5">
+          <div class="card">
+            <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 ">
+              <h4 class="mt-2 text-dark">{{title}}</h4>
+              {{#each subject.subject_student as |student|}}
+                {{#if (is_equal subject.enrollment.studentId id) }}
+                      <p>Student: {{student.first_name}} {{student.last_name}} </p>
+                {{/if}}
+              {{/each}}
+              <a href="/subject/{{id}}"
+                class="font-weight-bold text-xs text-uppercase font-weight-bolder text-info icon-move-right">
+                Check Class Info
+                <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+      {{/each}}
+
+  {{/if}}
+
+</div>
+
+{{!-- <script src="/js/studentsubject.js"></script> --}}
