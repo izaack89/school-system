@@ -32,17 +32,18 @@ router.get('/', (req, res) => {
 }); 
 
 
- router.get('/professorprofile', professorWithAuth, async (req, res) => {
+ router.get('/professorsubject', professorWithAuth, async (req, res) => {
   try {
     // Find the logged in professor based on the session ID
     const professorData = await Professor.findByPk(req.session.professor_id, {
       attributes: { exclude: ['password'] },
-      include: [ { model: Subject, through: Enrollment, as: 'professors_subjects' } ],
+      include: [ { model: Subject, through: Enrollment, as: 'professors_subjects' , include: [ { model: Student, through: Enrollment , as: 'subject_students'}]} ],
     });
 
     const professor = professorData.get({ plain: true });
+    console.log(professor.professors_subjects[0])
 
-    res.render('professorprofile', {
+    res.render('professorsubject', {
       ...professor,
       logged_in: true
     });
@@ -66,7 +67,7 @@ router.get('/', (req, res) => {
 router.get('/professorlogin', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/professorprofile');
+    res.redirect('/professorsubject');
     return;
   }
 
