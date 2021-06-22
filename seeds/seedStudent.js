@@ -13,7 +13,7 @@ const studentdata = [
     first_name: 'German',
     last_name: 'Ramirez',
     email: 'german@yahoo.com',
-    password: '$2b$10$xggcfE/2LaUr4ytNjWBD5.js9K7mUN/ufIM2.1oAbrQnSZ8NjuPk2',
+    password: '12345678',
   },
   {
     id: '3',
@@ -34,6 +34,13 @@ const studentdata = [
     first_name: 'Tyler',
     last_name: 'Wright',
     email: 'tyler@xxx.com',
+    password: 'administrator',
+  },
+  {
+    id: '7',
+    first_name: 'Seed',
+    last_name: 'Test',
+    email: 'test@op.com',
     password: 'administrator',
   },
 ];

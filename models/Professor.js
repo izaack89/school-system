@@ -40,6 +40,18 @@ Professor.init(
   {
     //Add la parte de hooks a 
     hooks: {
+      beforeBulkCreate: async (professors) => {
+        for (const professor of professors) {
+            const {
+                password
+            } = professor;
+
+            var saltRounds = 10;
+            var salt = bcrypt.genSaltSync(saltRounds);
+            var hash = bcrypt.hashSync(password, salt);
+            professor.password = hash;
+        }
+      },
       beforeCreate: async (newProfessorData) => {
         newProfessorData.password = await bcrypt.hash(newProfessorData.password, 10);
         return newProfessorData;
