@@ -41,6 +41,15 @@ router.get('/', (req, res) => {
     });
 
     const professor = professorData.get({ plain: true });
+    const profId= professor.id
+    const newP = professor.professors_subjects.filter(element => {
+      let newEle =element.subject_students.filter(ele => {
+        if(ele.enrollment.professorId === profId){
+          return ele;
+        }
+      });
+      element.subject_students=newEle;
+    });
     console.log(professor.professors_subjects[0])
 
     res.render('professorsubject', {
