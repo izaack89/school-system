@@ -9,9 +9,7 @@
             <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 ">
               <h4 class="mt-2 text-dark">{{title}}</h4>
               {{#each subject.subject_student as |student|}}
-                {{#if (is_equal subject.enrollment.studentId id) }}
-                      <p>Student: {{student.first_name}} {{student.last_name}} </p>
-                {{/if}}
+                    <p>Student: {{student.first_name}} {{student.last_name}} </p>
               {{/each}}
               <a href="/subject/{{id}}"
                 class="font-weight-bold text-xs text-uppercase font-weight-bolder text-info icon-move-right">

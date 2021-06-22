@@ -42,12 +42,16 @@ Student.init(
     //Add la parte de hooks a 
     hooks: {
       beforeBulkCreate: async (users) => {
-        console.log(users);
-        const newUsers = users.map( async(user) =>{
-          user.password = await bcrypt.hash(user.password, 10);
-        });
-        console.log(newUsers);
-        return newUsers;
+        for (const user of users) {
+            const {
+                password
+            } = user;
+
+            var saltRounds = 10;
+            var salt = bcrypt.genSaltSync(saltRounds);
+            var hash = bcrypt.hashSync(password, salt);
+            user.password = hash;
+        }
       },
       beforeCreate: async (newStudentData) => {
         newStudentData.password = await bcrypt.hash(newStudentData.password, 10);
