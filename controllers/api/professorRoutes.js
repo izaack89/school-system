@@ -40,12 +40,11 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.professor_id = professorData.id;
       req.session.logged_in = true;
-
       res.json({ professor: professorData, message: 'You are now logged in!' });
     });
 
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 

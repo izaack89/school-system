@@ -10,8 +10,10 @@ router.get('/', (req, res) => {
 });
 
 
+/***********  Student Section  ************/
+
 // Use withAuth middleware to prevent access to route
- router.get('/studentsubject', studentWithAuth, async (req, res) => {
+ router.get('/studentSubject', studentWithAuth, async (req, res) => {
   try {
     // Find the logged in student based on the session ID
     const studentData = await Student.findByPk(req.session.student_id, {
@@ -20,20 +22,71 @@ router.get('/', (req, res) => {
     });
 
     const student = studentData.get({ plain: true });
-    console.log(student.students_subjects[0])
-    res.render('studentsubject', {
+    res.render('students/studentSubject', {
       ...student,
       routeBack:"student",
+      logged_in: true
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+}); 
+
+ router.get('/studentLogin', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/studentSubject');
+    return;
+  }
+  res.render('students/studentLogin');
+}); 
+
+router.get('/studentSignup', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/studentSubject');
+    return;
+  }
+  res.render('students/studentSignup');
+}); 
+
+/***********  Subject Section  ************/
+
+router.get('/subject/:id/:professorId/:routeB', async (req, res) => {
+  try {
+    // Find the logged in professor based on the session ID
+    const subjectData = await Subject.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] },
+      include: [ { model: Student, through: Enrollment, as: 'subject_students' , include: [ { model: Professor, through: Enrollment , as: 'student_professor'}]} ],
+    });
+    const subjects = subjectData.get({ plain: true });
+    let routeback= "professorSubject";
+    if(req.params.routeB == "student"){
+      routeback="studentSubject";
+    }
+    const professorData = await Professor.findByPk(req.params.professorId, {
+      attributes: { exclude: ['password'] },
+    });
+    
+    const professor = professorData.get({ plain: true });
+    res.render('subjects/subjectsView', {
+      ...subjects,
+      professor,
+      routeback:routeback,
+      professorId:req.params.professorId,
       logged_in: true
     });
   } catch (err) {
     console.log(err)
     res.status(500).json(err);
   }
-}); 
+});
 
+/***********  Professor Section  ************/
 
- router.get('/professorsubject', professorWithAuth, async (req, res) => {
+router.get('/professorSubject', professorWithAuth, async (req, res) => {
+
   try {
     // Find the logged in professor based on the session ID
     const professorData = await Professor.findByPk(req.session.professor_id, {
@@ -51,9 +104,7 @@ router.get('/', (req, res) => {
       });
       element.subject_students=newEle;
     });
-    console.log(professor.professors_subjects[0])
-
-    res.render('professorsubject', {
+    res.render('professor/professorSubject', {
       ...professor,
       routeBack:"professor",
       logged_in: true
@@ -63,82 +114,23 @@ router.get('/', (req, res) => {
   }
 });
 
- router.get('/studentlogin', (req, res) => {
+router.get('/professorLogin', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/studentsubject');
+    res.redirect('/professorSubject');
     return;
   }
-  res.render('studentlogin');
-}); 
-
-router.get('/studentsignup', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/studentsubject');
-    return;
-  }
-  res.render('studentsignup');
-}); 
-
-
-router.get('/subject/:id/:professorId/:routeB', async (req, res) => {
-  try {
-    // Find the logged in professor based on the session ID
-    const subjectData = await Subject.findByPk(req.params.id, {
-      attributes: { exclude: ['password'] },
-      include: [ { model: Student, through: Enrollment, as: 'subject_students' , include: [ { model: Professor, through: Enrollment , as: 'student_professor'}]} ],
-    });
-    const subjects = subjectData.get({ plain: true });
-    let routeback= "professorsubject";
-    if(req.params.routeB == "student"){
-      routeback="studentsubject";
-    }
-    const professorData = await Professor.findByPk(req.params.professorId, {
-      attributes: { exclude: ['password'] },
-    });
-    
-    const professor = professorData.get({ plain: true });
-    res.render('subjectsView', {
-      ...subjects,
-      professor,
-      routeback:routeback,
-      professorId:req.params.professorId,
-      logged_in: true
-    });
-  } catch (err) {
-    console.log(err)
-    res.status(500).json(err);
-  }
+  res.render('professor/professorLogin');
 });
 
-
-
-router.get('/professorlogin', (req, res) => {
+router.get('/professorSignup', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/professorsubject');
-    return;
-  }
-  res.render('professorlogin');
-});
-
-router.get('/professorsignup', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/professorsubject');
+    res.redirect('/professorSubject');
     return;
   }
 
-  res.render('professorsignup');
+  res.render('professor/professorSignup');
 });
  
-
-
-
 module.exports = router;
-
-/*
-SELECT `student`.`id`, `student`.`first_name`, `student`.`last_name`, `student`.`email`, `students_subjects`.`id` AS `students_subjects.id`, `students_subjects`.`title` AS `students_subjects.title`, `students_subjects->enrollment`.`id` AS `students_subjects.enrollment.id`, `students_subjects->enrollment`.`grade` AS `students_subjects.enrollment.grade`, `students_subjects->enrollment`.`subject_id` AS `students_subjects.enrollment.subject_id`, `students_subjects->enrollment`.`professor_id` AS `students_subjects.enrollment.professor_id`, `students_subjects->enrollment`.`student_id` AS `students_subjects.enrollment.student_id`, `students_subjects->enrollment`.`student_id` AS `students_subjects.enrollment.studentId`, `students_subjects->enrollment`.`professor_id` AS `students_subjects.enrollment.professorId`, `students_subjects->enrollment`.`subject_id` AS `students_subjects.enrollment.subjectId`, `students_subjects->subject_professor`.`id` AS `students_subjects.subject_professor.id`, `students_subjects->subject_professor`.`first_name` AS `students_subjects.subject_professor.first_name`, `students_subjects->subject_professor`.`last_name` AS `students_subjects.subject_professor.last_name`, `students_subjects->subject_professor`.`email` AS `students_subjects.subject_professor.email`, `students_subjects->subject_professor`.`password` AS `students_subjects.subject_professor.password`, `students_subjects->subject_professor->enrollment`.`id` AS `students_subjects.subject_professor.enrollment.id`, `students_subjects->subject_professor->enrollment`.`grade` AS `students_subjects.subject_professor.enrollment.grade`, `students_subjects->subject_professor->enrollment`.`subject_id` AS `students_subjects.subject_professor.enrollment.subject_id`, `students_subjects->subject_professor->enrollment`.`professor_id` AS `students_subjects.subject_professor.enrollment.professor_id`, `students_subjects->subject_professor->enrollment`.`student_id` AS `students_subjects.subject_professor.enrollment.student_id`, `students_subjects->subject_professor->enrollment`.`student_id` AS `students_subjects.subject_professor.enrollment.studentId`, `students_subjects->subject_professor->enrollment`.`professor_id` AS `students_subjects.subject_professor.enrollment.professorId`, `students_subjects->subject_professor->enrollment`.`subject_id` AS `students_subjects.subject_professor.enrollment.subjectId` FROM `student` AS `student` LEFT OUTER JOIN ( `enrollment` AS `students_subjects->enrollment` INNER JOIN `subject` AS `students_subjects` ON `students_subjects`.`id` = `students_subjects->enrollment`.`subject_id`) ON `student`.`id` = `students_subjects->enrollment`.`student_id` LEFT OUTER JOIN ( `enrollment` AS `students_subjects->subject_professor->enrollment` INNER 
-
-*/ 

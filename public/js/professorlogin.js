@@ -17,7 +17,7 @@
           }
       }
 
-      return check;
+      return false;
   });
 
 
@@ -38,6 +38,17 @@
               return false;
           }
       }
+
+      if($(input).attr('type') == 'password' || $(input).attr('name') == 'pass') {
+        if($(input).val().length <8 ) {
+            return false;
+        }
+    }
+    else {
+        if($(input).val().trim() == ''){
+            return false;
+        }
+    }
   }
 
   function showValidate(input) {
@@ -79,7 +90,10 @@ const loginFormHandler = async (event) => {
         // If successful, redirect the browser to the profile page
         document.location.replace('/professorsubject');
       } else {
-        alert(response.statusText);
+        
+        response.json().then(function (data){
+          alert(data.message);
+        });
       }
     }
   };
