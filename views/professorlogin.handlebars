@@ -12,16 +12,16 @@
         </span>
 
         <div class='wrap-input100 validate-input' data-validate='Valid email is required: ex@abc.xyz'>
-          <label for='email-login' class='form-label'>Email address</label>
-          <input type='email' class='form-control input100' name="email" placeholder='Email' id='email-login' />
+          {{!-- <label for='email-login' class='form-label'>Email address</label> --}}
+          <input type='email ' class='form-control input100' name="email" placeholder='Email' id='email-login' />
           <span class="focus-input100"></span>
           <span class="symbol-input100">
             <i class="fa fa-envelope" aria-hidden="true"></i>
           </span>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="Password is required">
-          <label for='exampleInputPassword1' class='form-label'>Password</label>
+        <div class="wrap-input100 validate-input" data-validate="Password is required min 8 characters">
+          {{!-- <label for='exampleInputPassword1' class='form-label'>Password</label> --}}
           <input type='password' class='form-control input100' name='pass' placeholder='Password' id='password-login' />
           <span class="focus-input100"></span>
           <span class="symbol-input100">
@@ -43,7 +43,7 @@
 
     </div>
 
-    <script src="/js/professorlogin.js"></script>
+    
     <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
 
     <script src="/vendor/bootstrap/js/popper.js"></script>
@@ -52,6 +52,7 @@
     <script src="/vendor/select2/select2.min.js"></script>
 
     <script src="/vendor/tilt/tilt.jquery.min.js"></script>
+    <script src="/js/professorlogin.js"></script>
 
   </div>
 </div>
