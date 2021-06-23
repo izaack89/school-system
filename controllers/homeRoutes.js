@@ -67,8 +67,16 @@ router.get('/', (req, res) => {
     res.redirect('/studentsubject');
     return;
   }
-
   res.render('studentlogin');
+}); 
+
+router.get('/studentsignup', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/studentsubject');
+    return;
+  }
+  res.render('studentsignup');
 }); 
 
 
@@ -79,8 +87,17 @@ router.get('/professorlogin', (req, res) => {
     res.redirect('/professorsubject');
     return;
   }
-
   res.render('professorlogin');
+});
+
+router.get('/professorsignup', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/professorsubject');
+    return;
+  }
+
+  res.render('professorsignup');
 });
  
 
