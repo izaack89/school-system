@@ -3,11 +3,15 @@
 
     <div class='row' style="color:white">
       <div class='col-md-6'>
+        <i class="fas fa-user-graduate fa-10x"></i>
+      </div>
+
+      <div class='col-md-6'>
         <h2>Login</h2>
         <form class='login-form'>
           <div class='mb-3'>
             <label for='email-login' class='form-label'>Email address</label>
-            <input type='email' class='form-control' id='email-login'/>
+            <input type='email' class='form-control' id='email-login' />
           </div>
           <div class='mb-3'>
             <label for='exampleInputPassword1' class='form-label'>Password</label>
@@ -15,29 +19,9 @@
           </div>
           <button type='submit' class='btn btn-primary'>LOGIN</button>
         </form>
+        <a class="nav-link" aria-current="page" href="/studentsignup" id="studentsignup">Register</a>
       </div>
-      <div class='col-md-6' style="color:white">
-        <h2>Signup</h2>
-        <form class='form signup-form'>
-          <div class='mb-3'>
-            <label for='name-signup' class='form-label'>Name:</label>
-            <input class='form-control' type='text' id='name-signup' />
-          </div>
-          <div class='mb-3'>
-            <label for='lastname-signup' class='form-label'>Last name:</label>
-            <input class='form-control' type='text' id='lastname-signup' />
-          </div>
-          <div class='mb-3'>
-            <label for='email-signup' class='form-label'>Email:</label>
-            <input class='form-control' type='text' id='email-signup' />
-          </div>
-          <div class='mb-3'>
-            <label for='password-signup' class='form-label'>Password:</label>
-            <input class='form-control' type='password' id='password-signup' />
-          </div>
-            <button class='btn btn-primary' type='submit'>Signup</button>
-        </form>
-      </div>
+
     </div>
 
     <script src='/js/studentlogin.js'></script>
