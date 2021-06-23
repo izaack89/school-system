@@ -13,7 +13,7 @@
                       <p>Professor: {{professor.first_name}} {{professor.last_name}} </p>
                 {{/if}}
               {{/each}}
-              <a href="/subject/{{id}}"
+              <a href="/subject/{{id}}/{{subject.enrollment.professorId}}/student"
                 class="font-weight-bold text-xs text-uppercase font-weight-bolder text-info icon-move-right">
                 Check Class Info
                 <i class="fas fa-arrow-right text-xs ms-1" aria-hidden="true"></i>

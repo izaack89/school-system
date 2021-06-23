@@ -23,6 +23,7 @@ router.get('/', (req, res) => {
     console.log(student.students_subjects[0])
     res.render('studentsubject', {
       ...student,
+      routeBack:"student",
       logged_in: true
     });
   } catch (err) {
@@ -54,6 +55,7 @@ router.get('/', (req, res) => {
 
     res.render('professorsubject', {
       ...professor,
+      routeBack:"professor",
       logged_in: true
     });
   } catch (err) {
@@ -67,9 +69,48 @@ router.get('/', (req, res) => {
     res.redirect('/studentsubject');
     return;
   }
-
   res.render('studentlogin');
 }); 
+
+router.get('/studentsignup', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/studentsubject');
+    return;
+  }
+  res.render('studentsignup');
+}); 
+
+
+router.get('/subject/:id/:professorId/:routeB', async (req, res) => {
+  try {
+    // Find the logged in professor based on the session ID
+    const subjectData = await Subject.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] },
+      include: [ { model: Student, through: Enrollment, as: 'subject_students' , include: [ { model: Professor, through: Enrollment , as: 'student_professor'}]} ],
+    });
+    const subjects = subjectData.get({ plain: true });
+    let routeback= "professorsubject";
+    if(req.params.routeB == "student"){
+      routeback="studentsubject";
+    }
+    const professorData = await Professor.findByPk(req.params.professorId, {
+      attributes: { exclude: ['password'] },
+    });
+    
+    const professor = professorData.get({ plain: true });
+    res.render('subjectsView', {
+      ...subjects,
+      professor,
+      routeback:routeback,
+      professorId:req.params.professorId,
+      logged_in: true
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err);
+  }
+});
 
 
 
@@ -79,8 +120,17 @@ router.get('/professorlogin', (req, res) => {
     res.redirect('/professorsubject');
     return;
   }
-
   res.render('professorlogin');
+});
+
+router.get('/professorsignup', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/professorsubject');
+    return;
+  }
+
+  res.render('professorsignup');
 });
  
 
