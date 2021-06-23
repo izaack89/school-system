@@ -17,7 +17,7 @@
           }
       }
 
-      return check;
+      return false;
   });
 
 
@@ -90,7 +90,10 @@ const loginFormHandler = async (event) => {
         // If successful, redirect the browser to the profile page
         document.location.replace('/professorsubject');
       } else {
-        alert(response.statusText);
+        
+        response.json().then(function (data){
+          alert(data.message);
+        });
       }
     }
   };
