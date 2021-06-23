@@ -5,14 +5,19 @@
     <div class="row">
       {{#each students_subjects as |subject|}}
         <div class="col-lg-4 col-md-6 mb-5">
-          <div class="card">
-            <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 ">
-              <h4 class="mt-2 text-dark">{{title}}</h4>
+          <div class="card text-dark bg-light mb-3">
+            <div class="card-header" style="text-align: center;">
+              <p class="fs-2 mt-2 text-dark"><i class="{{icon}}"></i> {{title}}</p>
+            </div>
+            <div class="card-body border-radius-lg position-relative overflow-hidden pb-4 px-sm-5 ">              
               {{#each subject.subject_professor as |professor|}}
                 {{#if (is_equal subject.enrollment.professorId id) }}
-                      <p>Professor: {{professor.first_name}} {{professor.last_name}} </p>
+                      <p class="fs-6" style="text-align: center;"> <i class="fas fa-chalkboard-teacher"></i> Professor: {{professor.first_name}} {{professor.last_name}} </p>
                 {{/if}}
               {{/each}}
+            </div>
+
+            <div class="card-footer" style="text-align: center;">
               <a href="/subject/{{id}}/{{subject.enrollment.professorId}}/student"
                 class="font-weight-bold text-xs text-uppercase font-weight-bolder text-info icon-move-right">
                 Check Class Info
