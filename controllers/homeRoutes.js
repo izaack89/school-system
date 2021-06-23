@@ -23,6 +23,7 @@ router.get('/', (req, res) => {
     console.log(student.students_subjects[0])
     res.render('studentsubject', {
       ...student,
+      routeBack:"student",
       logged_in: true
     });
   } catch (err) {
@@ -54,6 +55,7 @@ router.get('/', (req, res) => {
 
     res.render('professorsubject', {
       ...professor,
+      routeBack:"professor",
       logged_in: true
     });
   } catch (err) {
@@ -70,6 +72,37 @@ router.get('/', (req, res) => {
 
   res.render('studentlogin');
 }); 
+
+
+router.get('/subject/:id/:professorId/:routeB', async (req, res) => {
+  try {
+    // Find the logged in professor based on the session ID
+    const subjectData = await Subject.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] },
+      include: [ { model: Student, through: Enrollment, as: 'subject_students' , include: [ { model: Professor, through: Enrollment , as: 'student_professor'}]} ],
+    });
+    const subjects = subjectData.get({ plain: true });
+    let routeback= "professorsubject";
+    if(req.params.routeB == "student"){
+      routeback="studentsubject";
+    }
+    const professorData = await Professor.findByPk(req.params.professorId, {
+      attributes: { exclude: ['password'] },
+    });
+    
+    const professor = professorData.get({ plain: true });
+    res.render('subjectsView', {
+      ...subjects,
+      professor,
+      routeback:routeback,
+      professorId:req.params.professorId,
+      logged_in: true
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err);
+  }
+});
 
 
 
