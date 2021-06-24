@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.student_id = studentData.id;
       req.session.logged_in = true;
-
+      req.session.logged_type = "student";
       res.status(200).json(studentData);
     });
   } catch (err) {
@@ -41,6 +41,7 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.student_id = studentData.id;
       req.session.logged_in = true;
+      req.session.logged_type = "student";
       res.json({ student: studentData, message: 'You are now logged in!' });
     });
 
