@@ -37,6 +37,10 @@ body, html {
     font-family: Poppins-Regular, sans-serif;
 }
 
+#calendar
+{
+background-color: white;
+}
 /*---------------------------------------------*/
 a {
     font-family: Poppins-Regular;

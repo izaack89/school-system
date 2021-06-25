@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.professor_id = professorData.id;
       req.session.logged_in = true;
-
+      req.session.logged_type = "professor";
       res.status(200).json(professorData);
     });
   } catch (err) {
@@ -40,6 +40,7 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.professor_id = professorData.id;
       req.session.logged_in = true;
+      req.session.logged_type = "professor";
       res.json({ professor: professorData, message: 'You are now logged in!' });
     });
 

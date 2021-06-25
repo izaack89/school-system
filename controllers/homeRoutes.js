@@ -22,10 +22,12 @@ router.get('/', (req, res) => {
     });
 
     const student = studentData.get({ plain: true });
+
     res.render('students/studentSubject', {
       ...student,
       routeBack:"student",
-      logged_in: true
+      logged_in: true,
+      logged_type: "student"
     });
   } catch (err) {
     console.log(err);
@@ -35,7 +37,7 @@ router.get('/', (req, res) => {
 
  router.get('/studentLogin', (req, res) => {
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
+  if (req.session.logged_in && logged_type==="student") {
     res.redirect('/studentSubject');
     return;
   }
@@ -44,7 +46,7 @@ router.get('/', (req, res) => {
 
 router.get('/studentSignup', (req, res) => {
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
+  if (req.session.logged_in && logged_type==="student") {
     res.redirect('/studentSubject');
     return;
   }
@@ -75,7 +77,8 @@ router.get('/subject/:id/:professorId/:routeB', async (req, res) => {
       professor,
       routeback:routeback,
       professorId:req.params.professorId,
-      logged_in: true
+      logged_in: true,
+      logged_type: req.session.logged_type
     });
   } catch (err) {
     console.log(err)
@@ -107,7 +110,9 @@ router.get('/professorSubject', professorWithAuth, async (req, res) => {
     res.render('professor/professorSubject', {
       ...professor,
       routeBack:"professor",
-      logged_in: true
+      logged_in: true,
+      professorId:req.session.professor_id,
+      logged_type: "professor"
     });
   } catch (err) {
     res.status(500).json(err);
@@ -116,7 +121,7 @@ router.get('/professorSubject', professorWithAuth, async (req, res) => {
 
 router.get('/professorLogin', (req, res) => {
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
+  if (req.session.logged_in && logged_type==="professor") {
     res.redirect('/professorSubject');
     return;
   }
@@ -125,7 +130,7 @@ router.get('/professorLogin', (req, res) => {
 
 router.get('/professorSignup', (req, res) => {
   // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
+  if (req.session.logged_in && logged_type==="professor") {
     res.redirect('/professorSubject');
     return;
   }
