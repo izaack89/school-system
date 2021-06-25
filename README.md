@@ -1,4 +1,4 @@
-# SCHOOL SYSTEM - Project #2
+# SCHOOL SYSTEM - Project #2 L'université
 ## TEAM NAME: TEAM 5 - SCHOOL OF ROCK
 **School System - Manage your School**
 \
@@ -63,11 +63,16 @@ _npm i to install external libraries._
 * [Jquery](https://jquery.com/)
 * [Bootstrap](https://getbootstrap.com/)
 * [Google Fonts](https://fonts.google.com/)
+* [Express.js](https://expressjs.com/)
+* [DotEnv](https://symfony.com/doc/3.4/components/dotenv.html)
+* [Bcrypt](http://bcrypt.sourceforge.net/)
+* [Express-session](https://expressjs.com/en/resources/middleware/session.html)
+* [Full Calendar](https://fullcalendar.io/)
 \
 &nbsp;
 ### Links ❔
 * [GITHUB Repository](https://github.com/izaack89/school-system) - `SCHOOL SYSTEM REPOSITORY`
-* [Live URL - Heroku](https://ragexxx.github.io/NY_MET_MUSEUM/) - `School System Webpage`
+* [Live URL - Heroku](https://still-castle-35310.herokuapp.com/) - `School System Webpage`
 \
 &nbsp;
 ## Authors ✒️
@@ -83,6 +88,8 @@ _npm i to install external libraries._
 * `Mark Carlson` 👨‍🏫
 * `BOOTCAMP` 🎒
 
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 
 
 ---
