@@ -1,15 +1,25 @@
 # SCHOOL SYSTEM - Project #2 L'université
+![GitHub license](https://img.shields.io/badge/Licenses-MIT-blue.svg)
 ## TEAM NAME: TEAM 5 - SCHOOL OF ROCK
 **School System - Manage your School**
 \
 &nbsp;
-## Description 🏚
+
+## Table of Contents
+
+- [Description](#description)
+- [Instructions](#instructions)
+- [Test](#test)
+- [Links](#links)
+- [Authors](#authors)
+- [License](#license)
+## Description
 
 _This application was developed for students and teachers that need an app for their school and need to control their assignments, time and take overall control of their tasks._
 \
 &nbsp;
 ![Search:](./readmeFiles/img/img0.png)
-## Instructions 🚀
+## Instructions
 
 `1. Select if you want to enter as a Student or as a Profeesor`
 * Click in the option that you need: 
@@ -26,7 +36,7 @@ _This application was developed for students and teachers that need an app for t
 
 * 1.1 Login as a Student
 
-    ![Search:](./vireadmeFilesews/img/img2.png)
+    ![Search:](./readmeFiles/img/img2.png)
 
 * After you sign in you can see what subjects you are enrolled, the profeesor of the class:
 
@@ -52,8 +62,24 @@ _Have Google Chrome, Microsoft Edge, Safari or any new browser installed in your
 
 ### Installation 🔧
 
-_npm i to install external libraries._
+To install external libraries please us the follow command
+```bash
+npm install
+```
+
 \
+&nbsp;
+### Test 
+
+Added some user in order to test our application on Heroku deployment
+
+* #### Student User 
+    * email: yaz@hotmail.com
+    *  password: 12345678
+*  #### Professor User 
+    * email: aaron@bootcamp.com
+    * password: goldman1
+
 &nbsp;
 ### Build with 🛠️
 * [Handlebars.js](https://handlebarsjs.com//) 
@@ -70,12 +96,12 @@ _npm i to install external libraries._
 * [Full Calendar](https://fullcalendar.io/)
 \
 &nbsp;
-### Links ❔
+### Links
 * [GITHUB Repository](https://github.com/izaack89/school-system) - `SCHOOL SYSTEM REPOSITORY`
 * [Live URL - Heroku](https://infinite-chamber-84516.herokuapp.com/) - `School System Webpage`
 \
 &nbsp;
-## Authors ✒️
+## Authors
 *SCHOOL OF ROCK TEAM:*
 * **`Yazmin Tinoco`**   - [Yazmin30-bot](https://github.com/Yazmin30-bot/)
 * **`Nicolas Avena`**  - [NAvena9](https://github.com/NAvena9/)
