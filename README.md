@@ -8,7 +8,7 @@
 _This application was developed for students and teachers that need an app for their school and need to control their assignments, time and take overall control of their tasks._
 \
 &nbsp;
-![Search:](./views/img/img0.png)
+![Search:](./readmeFiles/img/img0.png)
 ## Instructions 🚀
 
 `1. Select if you want to enter as a Student or as a Profeesor`
@@ -16,31 +16,31 @@ _This application was developed for students and teachers that need an app for t
     * `Student` 
     * `Professor` 
 
-    ![Search:](./views/img/img1.png)
+    ![Search:](./readmeFiles/img/img1.png)
 
 `1.1 Student view`
 * If it is the first time to enter to the app you have to create your account: 
 
-    ![Search:](./views/img/create_account.png)
-    ![Search:](./views/img/img_signup.png)
+    ![Search:](./readmeFiles/img/create_account.png)
+    ![Search:](./readmeFiles/img/img_signup.png)
 
 * 1.1 Login as a Student
 
-    ![Search:](./views/img/img2.png)
+    ![Search:](./vireadmeFilesews/img/img2.png)
 
 * After you sign in you can see what subjects you are enrolled, the profeesor of the class:
 
-    ![Search:](./views/img/student_view.png)
+    ![Search:](./readmeFiles/img/student_view.png)
 
 * If you want to check info of the subject that you are enrolled press the button check info:
 
-    ![Search:](./views/img/check_info.png)
-    ![Search:](./views/img/subject_info.png)
+    ![Search:](./readmeFiles/img/check_info.png)
+    ![Search:](./readmeFiles/img/subject_info.png)
 
 `2.1 Professor view`
 * After you sign in as a professor you can see the classes you give to students and the students enrolled in wich class: 
 
-    ![Search:](./views/img/professor_view.png)
+    ![Search:](./readmeFiles/img/professor_view.png)
 \
 &nbsp;
 
@@ -72,7 +72,7 @@ _npm i to install external libraries._
 &nbsp;
 ### Links ❔
 * [GITHUB Repository](https://github.com/izaack89/school-system) - `SCHOOL SYSTEM REPOSITORY`
-* [Live URL - Heroku](https://still-castle-35310.herokuapp.com/) - `School System Webpage`
+* [Live URL - Heroku](https://infinite-chamber-84516.herokuapp.com/) - `School System Webpage`
 \
 &nbsp;
 ## Authors ✒️
